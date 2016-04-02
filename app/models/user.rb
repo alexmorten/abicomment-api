@@ -12,4 +12,6 @@ class User < ApplicationRecord
 
   # note that this include statement comes AFTER the devise block above
   include DeviseTokenAuth::Concerns::User
+
+   enum status: [ :normal, :moderator, :admin ]
 end
