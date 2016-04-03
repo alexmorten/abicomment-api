@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', github: "rails/rails"
+gem 'devise', git: 'git@github.com:plataformatec/devise.git'
+gem 'devise_token_auth'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

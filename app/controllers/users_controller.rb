@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
     @users = User.all
-
-    render json: @users
+    if current_user.admin?
+      render json: @users
+    else
+      render json: @users.map{|u| u.attributes.slice("name","age")}
+    end
   end
 
   # GET /users/1
