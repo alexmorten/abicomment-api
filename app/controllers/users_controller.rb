@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    if current_user.admin?
+    # if current_user.admin?
       render json: @users
-    else
-      render json: @users.map{|u| u.attributes.slice("name","age")}
-    end
+    # else
+    #   render json: @users.map{|u| u.attributes.slice("name","age")}
+    # end
   end
 
   # GET /users/1

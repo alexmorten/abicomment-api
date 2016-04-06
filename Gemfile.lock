@@ -104,6 +104,7 @@ GEM
     puma (2.16.0)
     rack (2.0.0.alpha)
       json
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails-deprecated_sanitizer (1.0.3)
@@ -146,6 +147,7 @@ DEPENDENCIES
   devise!
   devise_token_auth
   puma
+  rack-cors
   rails!
   redis (~> 3.0)
   spring
