@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', github: "rails/rails"
-gem 'devise','~> 4.0.3'
-gem 'devise_token_auth', '~> 0.1.37'
+gem 'devise_token_auth', github:"lynndylanhurley/devise_token_auth", branch: "master"
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -20,7 +19,7 @@ gem 'redis', '~> 3.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
