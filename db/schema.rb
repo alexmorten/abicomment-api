@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160501102606) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.string   "text"
     t.integer  "user_id"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160501102606) do
     t.integer  "commentor_id"
   end
 
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "quotes", force: :cascade do |t|
     t.string   "text"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160501102606) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "quotes", ["user_id"], name: "index_quotes_on_user_id"
+  add_index "quotes", ["user_id"], name: "index_quotes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -56,8 +59,10 @@ ActiveRecord::Schema.define(version: 20160501102606) do
     t.integer  "status",                 default: 0
   end
 
-  add_index "users", ["email"], name: "index_users_on_email"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "quotes", "users"
 end
