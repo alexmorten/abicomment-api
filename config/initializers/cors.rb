@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:4200' , 'https://abicomment-ui.herokuapp.com', 'http://abicomment-ui.herokuapp.com'
+    origins 'http://localhost:4200' , 'https://abicomment-ui.herokuapp.com', 'http://abicomment-ui.herokuapp.com','https://abicomment-ui-development.herokuapp.com/','http://abicomment-ui-development.herokuapp.com/'
 
     resource '*',
       headers: :any,
