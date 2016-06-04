@@ -28,16 +28,20 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   def update
+    if(@current_user == @comment.user || @current_user == @comment.commentor || @current_user.status == "admin")
     if @comment.update(comment_params)
       render json: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
   end
+  end
 
   # DELETE /comments/1
   def destroy
+    if(@current_user == @comment.user || @current_user == @comment.commentor || @current_user.status == "admin")
     @comment.destroy
+    end
   end
 
   private

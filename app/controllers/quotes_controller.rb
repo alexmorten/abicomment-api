@@ -27,16 +27,20 @@ class QuotesController < ApplicationController
 
   # PATCH/PUT /quotes/1
   def update
+    if(@current_user == @quote.user || @current_user.status == "admin")
     if @quote.update(quote_params)
       render json: @quote
     else
       render json: @quote.errors, status: :unprocessable_entity
     end
+    end
   end
 
   # DELETE /quotes/1
   def destroy
+    if(@current_user == @quote.user || @current_user.status == "admin")
     @quote.destroy
+    end
   end
 
   private
