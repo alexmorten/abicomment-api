@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :options
+  resources :votes
+  resources :vote_options , path:"/vote-options"
+  resources :polls
   resources :quotes
   mount_devise_token_auth_for 'User', at: 'auth'
   resources :users
