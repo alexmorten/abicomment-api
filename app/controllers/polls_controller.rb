@@ -7,12 +7,12 @@ class PollsController < ApplicationController
   def index
     @polls = Poll.all
 
-    render json: @polls
+    render json: @polls, include: ['options']
   end
 
   # GET /polls/1
   def show
-    render json: @poll
+    render json: @poll, include: ['options']
   end
 
   # POST /polls
@@ -33,7 +33,7 @@ class PollsController < ApplicationController
    if @current_user.status == "admin" || @current_user.status == "moderator"
 
     if @poll.update(poll_params)
-      render json: @poll
+      render json: @poll, include: ['options']
     else
       render json: @poll.errors, status: :unprocessable_entity
     end
