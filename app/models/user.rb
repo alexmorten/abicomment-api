@@ -20,6 +20,13 @@ class User < ApplicationRecord
 
 
    def voted_for?(poll)
-  options.any? {|v| v.poll == poll }
+  options.any? {|o| o.poll == poll }
+  end
+  def delete_any_vote_for(poll)
+    votes.each {|v|
+      if v.option.poll==poll
+        v.destroy()
+      end
+    }
   end
 end

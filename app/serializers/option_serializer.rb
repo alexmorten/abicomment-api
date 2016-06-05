@@ -1,4 +1,4 @@
 class OptionSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :voteamount
   belongs_to :poll
 end
