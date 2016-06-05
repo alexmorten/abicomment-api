@@ -17,8 +17,8 @@ class VotesController < ApplicationController
 
   # POST /votes
   def create
-
-    @option = Option.find_by_id(params[:option_id])
+    if(@option = Option.find_by_id(params[:option_id]))
+  #  @option = Option.find_by_id(params[:option_id])
     @poll = @option.poll
     if @option && @poll
       @current_user.delete_any_vote_for(@poll)
@@ -30,6 +30,7 @@ class VotesController < ApplicationController
         render json: @vote.errors, status: :unprocessable_entity
       end
     end
+  end
   end
 
   # PATCH/PUT /votes/1

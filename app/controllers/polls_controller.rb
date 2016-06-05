@@ -17,27 +17,34 @@ class PollsController < ApplicationController
 
   # POST /polls
   def create
-    @poll = Poll.new(poll_params)
+    if @current_user.status == "admin" || @current_user.status == "moderator"
+      @poll = Poll.new(poll_params)
 
-    if @poll.save
-      render json: @poll, status: :created, location: @poll
-    else
-      render json: @poll.errors, status: :unprocessable_entity
+      if @poll.save
+        render json: @poll, status: :created, location: @poll
+      else
+        render json: @poll.errors, status: :unprocessable_entity
+      end
     end
   end
 
   # PATCH/PUT /polls/1
   def update
+   if @current_user.status == "admin" || @current_user.status == "moderator"
+
     if @poll.update(poll_params)
       render json: @poll
     else
       render json: @poll.errors, status: :unprocessable_entity
     end
+   end
   end
 
   # DELETE /polls/1
   def destroy
-    @poll.destroy
+    if @current_user.status == "admin" || @current_user.status == "moderator"
+      @poll.destroy
+    end
   end
 
   private

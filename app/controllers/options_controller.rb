@@ -17,6 +17,7 @@ class OptionsController < ApplicationController
 
   # POST /options
   def create
+   if @current_user.status == "admin" || @current_user.status == "moderator"
     @option = Option.new(option_params)
 
     if @option.save
@@ -24,22 +25,26 @@ class OptionsController < ApplicationController
     else
       render json: @option.errors, status: :unprocessable_entity
     end
+   end
   end
 
   # PATCH/PUT /options/1
   def update
+   if @current_user.status == "admin" || @current_user.status == "moderator"
     if @option.update(option_params)
       render json: @option
     else
       render json: @option.errors, status: :unprocessable_entity
     end
+   end
   end
 
   # DELETE /options/1
   def destroy
-    @option.destroy
+    if @current_user.status == "admin" || @current_user.status == "moderator"
+      @option.destroy
+    end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_option
