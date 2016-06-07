@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :comments
   has_many :comments_written
   has_many :quotes
+  has_many :votes
 end
