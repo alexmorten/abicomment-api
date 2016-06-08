@@ -4,6 +4,10 @@ class PollSerializer < ActiveModel::Serializer
 
 
 def hasvoted
-  true if scope.voted_for?(object)
+   if scope.voted_for?(object)
+     return true
+   else
+     return false;
+   end
 end
 end
