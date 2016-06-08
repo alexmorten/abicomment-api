@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
-   serialization_scope :view_context
+  
   after_action :cors_set_access_control_headers
 
 def cors_set_access_control_headers
