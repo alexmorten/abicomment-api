@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
-
+  
   after_action :cors_set_access_control_headers
 
 def cors_set_access_control_headers

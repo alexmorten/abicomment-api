@@ -18,10 +18,8 @@ class VotesController < ApplicationController
   # POST /votes
   def create
     if(@option = Option.find_by_id(params[:option_id]))
-  #  @option = Option.find_by_id(params[:option_id])
     @poll = @option.poll
-    if @option && @poll
-      @current_user.delete_any_vote_for(@poll)
+    if @option && @poll && !@current_user.voted_for?(@poll)
       @vote = Vote.new(vote_params)
       @vote.user = @current_user
       if @vote.save
