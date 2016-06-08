@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.order(name: :asc)
     # if current_user.admin?
       render json: @users
     # else

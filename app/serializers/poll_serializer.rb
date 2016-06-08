@@ -1,13 +1,9 @@
 class PollSerializer < ActiveModel::Serializer
-  attributes :id, :topic, :voteamount , :hasvoted
+  attributes :id, :topic , :hasvoted
   has_many :options
 
 
 def hasvoted
-   if scope.voted_for?(object)
-     return true
-   else
-     return false;
-   end
+  scope.voted_for?(object)
 end
 end
