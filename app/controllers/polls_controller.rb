@@ -1,6 +1,5 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!
-
   before_action :set_poll, only: [:show, :update, :destroy]
 
   # GET /polls
