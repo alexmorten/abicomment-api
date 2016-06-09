@@ -26,7 +26,7 @@
 #
 #
 
-----
+#------------
 u = User.create(forename:"Alexander",name:"Martin",email:"alexandrius.martinus@gmx.de",password:"1234567890")
  u = User.create(forename:"Leon",name:"Berkemeier",email:"Leonxd90411@gmail.com",password:"zJg4Hd9c")
  u = User.create(forename:"Christopher",name:"Kröger",email:"chrissi12l@web.de",password:"pdkx7PRT")
