@@ -31,9 +31,9 @@ u = User.create(forename:"Alexander",name:"Martin",email:"alexandrius.martinus@g
  u = User.create(forename:"Leon",name:"Berkemeier",email:"Leonxd90411@gmail.com",password:"zJg4Hd9c")
  u = User.create(forename:"Christopher",name:"Kröger",email:"chrissi12l@web.de",password:"pdkx7PRT")
 u = User.create(forename:"Max",name:"Kolvenbach",email:"maxkolvenbach99@gmail.com",password:"8dVqeR6X")
- u = User.create(forename:"Keno",name:"Juist",email:"keno.juist@gmail.com",password:"R4NnmA6G")
+ u = User.create(forename:"Keno",name:"Ohrmann",email:"keno.juist@gmail.com",password:"R4NnmA6G")
   u = User.create(forename:"Simon",name:"Thiele",email:"sth@mplogin.de",password:"T5cRAC2g")
   u = User.create(forename:"Celine",name:"Middendorf",email:"celine@cmiddendorf.de",password:"nVhVAA7j")
-
+u = User.create(forename:"Ines",name:"Lütke Wenning",email:"ineslw@web.de",password:"vFP2Ab96")
   #  u = User.create(forename:"Leon",name:"Berkemeier",email:"Leonxd90411@gmail.com",password:"zJg4Hd9c")
     # u = User.create(forename:"Leon",name:"Berkemeier",email:"Leonxd90411@gmail.com",password:"zJg4Hd9c")
