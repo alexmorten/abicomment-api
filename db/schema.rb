@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608165818) do
+ActiveRecord::Schema.define(version: 20160613150355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anecdotes", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "anecdotes", ["course_id"], name: "index_anecdotes_on_course_id", using: :btree
+  add_index "anecdotes", ["user_id"], name: "index_anecdotes_on_user_id", using: :btree
+
+  create_table "attendings", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "attendings", ["course_id"], name: "index_attendings_on_course_id", using: :btree
+  add_index "attendings", ["user_id"], name: "index_attendings_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -25,6 +47,13 @@ ActiveRecord::Schema.define(version: 20160608165818) do
   end
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "teacher"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "options", force: :cascade do |t|
     t.string   "title"
@@ -90,6 +119,10 @@ ActiveRecord::Schema.define(version: 20160608165818) do
   add_index "votes", ["option_id"], name: "index_votes_on_option_id", using: :btree
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
+  add_foreign_key "anecdotes", "courses"
+  add_foreign_key "anecdotes", "users"
+  add_foreign_key "attendings", "courses"
+  add_foreign_key "attendings", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "options", "polls"
   add_foreign_key "quotes", "users"
