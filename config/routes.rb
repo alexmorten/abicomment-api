@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :anecdotes
+  resources :attendings
+  resources :courses
   resources :options
   resources :votes
   resources :vote_options , path:"/vote-options"
