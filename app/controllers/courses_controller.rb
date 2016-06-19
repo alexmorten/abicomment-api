@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = Course.all
+    @courses = Course.order(name: :desc)
 
     render json: @courses
   end

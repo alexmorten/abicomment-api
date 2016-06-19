@@ -4,9 +4,9 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :update, :destroy]
   # GET /quotes
   def index
-    @quotes = Quote.all
+    @quotes = Quote.order(created_at: :desc).limit(params[:limit])
 
-    render json: @quotes
+    render json: @quotes, meta:{ total:Quote.count}
   end
 
   # GET /quotes/1

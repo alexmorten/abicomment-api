@@ -4,9 +4,9 @@ class PollsController < ApplicationController
 
   # GET /polls
   def index
-    @polls = Poll.all
+    @polls = Poll.order(created_at: :desc).limit(params[:limit])
 
-    render json: @polls, include: ['options']
+    render json: @polls, include: ['options'], meta:{total:Poll.count}
   end
 
   # GET /polls/1

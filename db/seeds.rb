@@ -9,3 +9,4 @@ u = User.create(forename:"Max",name:"Kolvenbach",email:"maxkolvenbach99@gmail.co
   u = User.create(forename:"Celine",name:"Middendorf",email:"celine@cmiddendorf.de",password:"nVhVAA7j")
 u = User.create(forename:"Ines",name:"Lütke Wenning",email:"ineslw@web.de",password:"12345678")
 u = User.create(forename:"Andre",name:"Felmet",email:"a.felmet@online.de",password:"xFce31fjiurd")
+u = User.create(forename:"Steffen",name:"Beckmann",email:"steffen.beckmann1@gmail.com",password:"jxUT2Z8L")
