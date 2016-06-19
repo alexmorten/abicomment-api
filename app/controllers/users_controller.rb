@@ -5,16 +5,12 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    # if current_user.admin?
       render json: @users
-    # else
-    #   render json: @users.map{|u| u.attributes.slice("name","age")}
-    # end
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user,include: ['attendings','comments'],meta:{ total:@user.comments.count} ,serializer: SingleUserSerializer
   end
 
   # POST /users
