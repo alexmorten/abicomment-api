@@ -10,7 +10,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user,include: ['attendings','comments'],meta:{ total:@user.comments.count} ,serializer: SingleUserSerializer
+    
+    render json: @user,meta:{ total:@user.comments.count} ,serializer: SingleUserSerializer, comment_limit:params[:limit]
+
   end
 
   # POST /users
