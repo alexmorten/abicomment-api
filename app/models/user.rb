@@ -4,8 +4,12 @@ class User < ApplicationRecord
 
   has_many :quotes
 
+  has_many :polls
+
   has_many :votes, dependent: :destroy
   has_many :options, through: :votes
+
+  has_many :courses_created, :class_name => "Course",:inverse_of => :creator
 
   has_many :attendings
   has_many :courses, through: :attendings

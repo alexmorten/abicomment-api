@@ -18,7 +18,7 @@ class PollsController < ApplicationController
   def create
     if @current_user.status == "admin" || @current_user.status == "moderator"
       @poll = Poll.new(poll_params)
-
+      @poll.user=@current_user
       if @poll.save
         render json: @poll, status: :created, location: @poll
       else
