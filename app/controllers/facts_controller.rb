@@ -4,9 +4,10 @@ class FactsController < ApplicationController
 
   # GET /facts
   def index
-    @facts = Fact.all
+    limit = params[:limit] || 20
+    @facts = Fact.order(created_at: :desc).limit(limit)
 
-    render json: @facts
+    render json: @facts, meta:{total:Fact.count}
   end
 
   # GET /facts/1
