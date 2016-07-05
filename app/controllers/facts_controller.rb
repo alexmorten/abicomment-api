@@ -18,7 +18,7 @@ class FactsController < ApplicationController
   # POST /facts
   def create
     @fact = Fact.new(fact_params)
-
+    @fact.user=@current_user
     if @fact.save
       render json: @fact, status: :created, location: @fact
     else
