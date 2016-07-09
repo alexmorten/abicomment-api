@@ -43,6 +43,7 @@ class AttendingsController < ApplicationController
   # DELETE /attendings/1
   def destroy
   if(@current_user == @attending.user || @current_user.status == "admin")
+      Log.create(user:@current_user,kind:"deleted",catagory:"attending",text:"id: "+@attending.id.to_s+",course_id: "+@attending.course.id.to_s+" ,course_name:"+@attending.course.name+" ,user: "+@attending.user.forename+" "+@attending.user.name)
     @attending.destroy
   end
   end

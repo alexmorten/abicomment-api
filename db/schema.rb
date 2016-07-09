@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620204644) do
+ActiveRecord::Schema.define(version: 20160709143332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,17 @@ ActiveRecord::Schema.define(version: 20160620204644) do
   end
 
   add_index "facts", ["user_id"], name: "index_facts_on_user_id", using: :btree
+
+  create_table "logs", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "kind"
+    t.string   "catagory"
+  end
+
+  add_index "logs", ["user_id"], name: "index_logs_on_user_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.string   "title"
@@ -141,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160620204644) do
   add_foreign_key "comments", "users"
   add_foreign_key "courses", "users"
   add_foreign_key "facts", "users"
+  add_foreign_key "logs", "users"
   add_foreign_key "options", "polls"
   add_foreign_key "polls", "users"
   add_foreign_key "quotes", "users"

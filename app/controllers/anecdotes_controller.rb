@@ -40,6 +40,7 @@ class AnecdotesController < ApplicationController
   # DELETE /anecdotes/1
   def destroy
       if(@current_user == @anecdote.user || @current_user.status == "admin")
+        Log.create(user:@current_user,kind:"deleted",catagory:"ancedote",text:"id: "+@anecdote.id.to_s+",course_id: "+@anecdote.course.id.to_s+" ,course_name:"+@anecdote.course.name+" ,text: "+@anecdote.text)
         @anecdote.destroy
       end
   end

@@ -40,6 +40,7 @@ class QuotesController < ApplicationController
   # DELETE /quotes/1
   def destroy
     if(@current_user == @quote.user || @current_user.status == "admin")
+    Log.create(user:@current_user,kind:"deleted",catagory:"quote",text:"id: "+@quote.id.to_s+" ,quoted:"+@quote.quoted+" ,text:"+@quote.text+" ,created by: "+@quote.user.forename+" "+@quote.user.name)
     @quote.destroy
     end
   end

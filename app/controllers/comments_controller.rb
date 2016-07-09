@@ -40,6 +40,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     if(@current_user == @comment.user || @current_user == @comment.commentor || @current_user.status == "admin")
+    Log.create(user:@current_user,kind:"deleted",catagory:"comment",text:"id: "+@comment.id.to_s+" ,comment: "+@comment.text+" ,created for:"+@comment.user.forename+" "+@comment.user.name+" ,created by: "+@comment.commentor.forename+" "+@comment.commentor.name)
+
     @comment.destroy
     end
   end
