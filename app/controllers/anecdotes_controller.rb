@@ -4,7 +4,8 @@ class AnecdotesController < ApplicationController
 
   # GET /anecdotes
   def index
-    @anecdotes = Anecdote.all
+    limit = params[:limit] || 20
+    @anecdotes = Anecdote.order(created_at: :desc).limit(limit)
 
     render json: @anecdotes
   end
