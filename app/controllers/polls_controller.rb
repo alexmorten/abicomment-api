@@ -42,6 +42,8 @@ class PollsController < ApplicationController
   # DELETE /polls/1
   def destroy
     if @current_user.status == "admin" || @current_user.status == "moderator"
+      Log.create(user:@current_user,kind:"deleted",catagory:"poll",text:"id: "+@poll.id.to_s+" ,poll: "+@poll.topic+" ,created by:"+@poll.user.forename+" "+@poll.user.name)
+
       @poll.destroy
     end
   end

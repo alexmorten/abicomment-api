@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :courses, through: :attendings
   has_many :anecdotes
 
+  has_many :logs
+
   has_many :facts
   # notice this comes BEFORE the include statement below
   # also notice that :confirmable is not included in this block

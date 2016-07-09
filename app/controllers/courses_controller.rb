@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   def destroy
       if( @current_user.status == "admin" || @course.creator == @current_user)
+      Log.create(user:@current_user,kind:"deleted",catagory:"couse",text:"id: "+@course.id.to_s+" ,name:"+@course.name+" ,teacher: "+@course.teacher)
     @course.destroy
   end
   end
