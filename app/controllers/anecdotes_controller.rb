@@ -7,7 +7,7 @@ class AnecdotesController < ApplicationController
     limit = params[:limit] || 20
     @anecdotes = Anecdote.order(created_at: :desc).limit(limit)
 
-    render json: @anecdotes
+    render json: @anecdotes, meta:{total:Anecdote.count}
   end
 
   # GET /anecdotes/1
