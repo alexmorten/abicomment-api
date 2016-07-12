@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name,:forename,:fullname,:status,:currentsigninat,:currentsigninip
+  attributes :id, :name,:forename,:fullname,:status,:currentsigninat,:currentsigninip,:signincount
   def fullname
     object.forename+" "+object.name
   end
@@ -8,5 +8,8 @@ class UserSerializer < ActiveModel::Serializer
   end
   def currentsigninip
     object.current_sign_in_ip
+  end
+  def signincount
+    object.sign_in_count
   end
 end
