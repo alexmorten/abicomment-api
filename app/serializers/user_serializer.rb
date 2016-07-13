@@ -4,7 +4,7 @@ class UserSerializer < ActiveModel::Serializer
     object.forename+" "+object.name
   end
   def currentsigninat
-    object.current_sign_in_at
+    object.updated_at
   end
   def currentsigninip
     object.current_sign_in_ip
