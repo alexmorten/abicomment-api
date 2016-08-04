@@ -6,7 +6,6 @@ class AnecdotesController < ApplicationController
   def index
     limit = params[:limit] || 20
     @anecdotes = Anecdote.order(created_at: :desc).limit(limit)
-
     render json: @anecdotes, meta:{total:Anecdote.count}
   end
 

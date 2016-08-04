@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @comments = Comment.all
+    limit = params[:limit] || 20
+    @comments = Comment.limit(limit)
 
     render json: @comments
   end
