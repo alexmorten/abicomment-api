@@ -5,7 +5,7 @@ class MottosController < ApplicationController
   # GET /mottos
   def index
     limit = params[:limit] || 20
-    @mottos = Motto.all
+    @mottos = Motto.joins(:mottovotes).group("mottos.id").order("count(mottovotes.id) desc").limit(limit)
 
 
     render json: @mottos , meta: {total:Motto.count}
