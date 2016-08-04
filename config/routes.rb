@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mottovotes
+  resources :mottos
   resources :logs
   resources :facts
   resources :anecdotes
