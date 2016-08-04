@@ -4,7 +4,5 @@ class MottoSerializer < ActiveModel::Serializer
   def hasupvoted
     scope.has_upvoted?(object)
   end
-  def upvotes
-    object.mottovotes.count
-  end
+
 end

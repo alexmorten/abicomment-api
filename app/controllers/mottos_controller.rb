@@ -5,9 +5,10 @@ class MottosController < ApplicationController
   # GET /mottos
   def index
     limit = params[:limit] || 20
-    @mottos = Motto.order(mottovotes.count: :desc).limit(limit)
+    @mottos = Motto.all
 
-    render json: @mottos
+
+    render json: @mottos , meta: {total:Motto.count}
   end
 
   # GET /mottos/1
@@ -18,7 +19,7 @@ class MottosController < ApplicationController
   # POST /mottos
   def create
     @motto = Motto.new(motto_params)
-
+    @motto.user=@current_user
     if @motto.save
       render json: @motto, status: :created, location: @motto
     else

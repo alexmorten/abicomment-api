@@ -7,7 +7,7 @@ class MottovotesController < ApplicationController
     limit = params[limit] || 20
     @mottovotes = Mottovote.all
 
-    render json: @mottovotes
+    render json: @mottovotes, meta: {total:Mottovote.count}
   end
 
   # GET /mottovotes/1
@@ -17,13 +17,18 @@ class MottovotesController < ApplicationController
 
   # POST /mottovotes
   def create
-    @mottovote = Mottovote.new(mottovote_params)
+    if(@motto = Motto.find_by_id(params[:motto_id]))
 
+    if @motto && !@current_user.has_upvoted?(@motto)
+      @mottovote = Mottovote.new(mottovote_params)
+      @mottovote.user=@current_user
     if @mottovote.save
       render json: @mottovote, status: :created, location: @mottovote
     else
       render json: @mottovote.errors, status: :unprocessable_entity
     end
+  end
+end
   end
 
   # PATCH/PUT /mottovotes/1
