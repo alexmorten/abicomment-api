@@ -18,6 +18,9 @@ class User < ApplicationRecord
   has_many :logs
 
   has_many :facts
+
+  has_many :mottovotes
+  has_many :mottos, through: :mottovotes
   # notice this comes BEFORE the include statement below
   # also notice that :confirmable is not included in this block
   devise :database_authenticatable,
@@ -35,6 +38,9 @@ class User < ApplicationRecord
 
    def voted_for?(poll)
      options.where(poll_id: poll.id).any?
+   end
+   def has_upvoted?(motto)
+     mottovotes.where(motto_id: motto.id).any?
    end
    def is_attending?(course)
      attendings.where(course_id: course.id).any?

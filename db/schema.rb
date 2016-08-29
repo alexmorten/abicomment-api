@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709143332) do
+ActiveRecord::Schema.define(version: 20160804100123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,27 @@ ActiveRecord::Schema.define(version: 20160709143332) do
   end
 
   add_index "logs", ["user_id"], name: "index_logs_on_user_id", using: :btree
+
+  create_table "mottos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "mottos", ["user_id"], name: "index_mottos_on_user_id", using: :btree
+
+  create_table "mottovotes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "motto_id"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "mottovotes", ["motto_id"], name: "index_mottovotes_on_motto_id", using: :btree
+  add_index "mottovotes", ["user_id", "motto_id"], name: "index_mottovotes_on_user_id_and_motto_id", unique: true, using: :btree
+  add_index "mottovotes", ["user_id"], name: "index_mottovotes_on_user_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.string   "title"
@@ -153,6 +174,9 @@ ActiveRecord::Schema.define(version: 20160709143332) do
   add_foreign_key "courses", "users"
   add_foreign_key "facts", "users"
   add_foreign_key "logs", "users"
+  add_foreign_key "mottos", "users"
+  add_foreign_key "mottovotes", "mottos"
+  add_foreign_key "mottovotes", "users"
   add_foreign_key "options", "polls"
   add_foreign_key "polls", "users"
   add_foreign_key "quotes", "users"
