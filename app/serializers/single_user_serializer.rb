@@ -1,5 +1,5 @@
 class SingleUserSerializer < ActiveModel::Serializer
-  attributes :id, :name,:forename,:fullname,:status
+  attributes :id, :name,:forename,:fullname,:status,:isfavorited
   has_many :ordered_limited_comments, key: :comments
   has_many :attendings
   def ordered_limited_comments
@@ -9,5 +9,8 @@ class SingleUserSerializer < ActiveModel::Serializer
 
   def fullname
     object.forename+" "+object.name
+  end
+  def isfavorited
+      scope.has_favorited?(object)
   end
 end

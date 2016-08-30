@@ -21,6 +21,9 @@ class User < ApplicationRecord
 
   has_many :mottovotes
   has_many :mottos, through: :mottovotes
+
+  has_many :favorites
+  has_many :favorited , :class_name => "Favorite" , :inverse_of => :favoritee
   # notice this comes BEFORE the include statement below
   # also notice that :confirmable is not included in this block
   devise :database_authenticatable,
@@ -44,6 +47,9 @@ class User < ApplicationRecord
    end
    def is_attending?(course)
      attendings.where(course_id: course.id).any?
+   end
+   def has_favorited?(user)
+     favorites.where(favoritee_id: user.id).any?
    end
   def delete_any_vote_for(poll)
     votes.each {|v|

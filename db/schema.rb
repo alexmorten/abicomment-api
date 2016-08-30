@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804100123) do
+ActiveRecord::Schema.define(version: 20160829212846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 20160804100123) do
   end
 
   add_index "facts", ["user_id"], name: "index_facts_on_user_id", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favoritee_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "favorites", ["favoritee_id", "user_id"], name: "index_favorites_on_favoritee_id_and_user_id", unique: true, using: :btree
+  add_index "favorites", ["user_id", "favoritee_id"], name: "index_favorites_on_user_id_and_favoritee_id", unique: true, using: :btree
 
   create_table "logs", force: :cascade do |t|
     t.text     "text"
