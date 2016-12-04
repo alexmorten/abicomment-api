@@ -5,9 +5,10 @@ class QuotesController < ApplicationController
   # GET /quotes
   def index
     limit = params[:limit] || 20
-    @quotes = Quote.order(created_at: :desc).limit(limit)
+    query = params[:query] || ""
+    @quotes = Quote.order(created_at: :desc).where("LOWER(text) LIKE LOWER(?) OR LOWER(quoted) LIKE LOWER(?)","%#{query}%","%#{query}%").limit(limit)
 
-    render json: @quotes, meta:{ total:Quote.count}
+    render json: @quotes, meta:{ total:Quote.where("LOWER(text) LIKE LOWER(?) OR LOWER(quoted) LIKE LOWER(?)","%#{query}%","%#{query}%").count}
   end
 
   # GET /quotes/1

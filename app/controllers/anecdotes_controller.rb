@@ -5,8 +5,9 @@ class AnecdotesController < ApplicationController
   # GET /anecdotes
   def index
     limit = params[:limit] || 20
-    @anecdotes = Anecdote.order(created_at: :desc).limit(limit)
-    render json: @anecdotes, meta:{total:Anecdote.count}
+    query = params[:query] || ""
+    @anecdotes = Anecdote.order(created_at: :desc).where("LOWER(text) LIKE LOWER( ? )","%#{query}%").limit(limit)
+    render json: @anecdotes, meta:{total:Anecdote.where("LOWER(text) LIKE LOWER( ? )","%#{query}%").count}
   end
 
   # GET /anecdotes/1

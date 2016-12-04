@@ -5,9 +5,10 @@ class FactsController < ApplicationController
   # GET /facts
   def index
     limit = params[:limit] || 20
-    @facts = Fact.order(created_at: :desc).limit(limit)
+    query = params[:query] || ""
+    @facts = Fact.order(created_at: :desc).where("LOWER(text)  LIKE LOWER( ? )","%#{query}%").limit(limit)
 
-    render json: @facts, meta:{total:Fact.count}
+    render json: @facts, meta:{total:Fact.where("LOWER(text) LIKE  LOWER ( ? )","%#{query}%").count}
   end
 
   # GET /facts/1

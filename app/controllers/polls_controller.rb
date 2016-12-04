@@ -4,9 +4,11 @@ class PollsController < ApplicationController
 
   # GET /polls
   def index
-    @polls = Poll.order(created_at: :desc).limit(params[:limit])
+    limit = params[:limit] || 10
+    query = params[:query] || ""
+    @polls = Poll.order(created_at: :desc).where("LOWER(topic) LIKE LOWER( ? )","%#{query}%").limit(params[:limit])
 
-    render json: @polls, meta:{total:Poll.count}
+    render json: @polls, meta:{total:Poll.where("LOWER(topic) LIKE LOWER( ? )","%#{query}%").count}
   end
 
   # GET /polls/1
