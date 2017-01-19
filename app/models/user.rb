@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_many :mottovotes
   has_many :mottos, through: :mottovotes
 
+  has_many :transactions
+
   has_many :favorites
   has_many :favorited , :class_name => "Favorite" , :inverse_of => :favoritee
   # notice this comes BEFORE the include statement below
