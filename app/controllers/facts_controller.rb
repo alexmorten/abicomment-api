@@ -38,7 +38,7 @@ class FactsController < ApplicationController
 
   # DELETE /facts/1
   def destroy
-    if @current_user==@fact.user || @current_user.status=="admin" || @current_user.status=="moderator"
+    if @current_user==@fact.user || @current_user.status=="admin" || @current_user.status=="moderator" || @current_user.status == "trusted"
     Log.create(user:@current_user,kind:"deleted",catagory:"fact",text:"id: "+@fact.id.to_s+" ,text:"+@fact.text+" ,created by: "+@fact.user.forename+" "+@fact.user.name)
 
     @fact.destroy

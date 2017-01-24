@@ -17,7 +17,7 @@ class OptionsController < ApplicationController
 
   # POST /options
   def create
-   if @current_user.status == "admin" || @current_user.status == "moderator"
+   if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted"
     @option = Option.new(option_params)
 
     if @option.save
@@ -30,7 +30,7 @@ class OptionsController < ApplicationController
 
   # PATCH/PUT /options/1
   def update
-   if @current_user.status == "admin" || @current_user.status == "moderator"
+   if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted"
     if @option.update(option_params)
       render json: @option
     else
@@ -41,7 +41,7 @@ class OptionsController < ApplicationController
 
   # DELETE /options/1
   def destroy
-    if @current_user.status == "admin" || @current_user.status == "moderator"
+    if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted"
       @option.destroy
     end
   end

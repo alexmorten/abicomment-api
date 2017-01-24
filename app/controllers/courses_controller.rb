@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
 
   # POST /courses
   def create
-    if(@current_user.status == "moderator" || @current_user.status == "admin")
+    if(@current_user.status == "moderator" || @current_user.status == "admin" || @current_user.status == "trusted")
     @course = Course.new(course_params)
     @course.creator=@current_user
     if @course.save
@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
 
   # PATCH/PUT /courses/1
   def update
-    if(@current_user.status == "admin" || @course.creator == @current_user)
+    if(@current_user.status == "admin" || @course.creator == @current_user || @current_user.status == "trusted")
     if @course.update(course_params)
       render json: @course
     else
@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
 
   # DELETE /courses/1
   def destroy
-      if( @current_user.status == "admin" || @course.creator == @current_user)
+      if( @current_user.status == "admin" || @course.creator == @current_user || @current_user.status == "trusted")
       Log.create(user:@current_user,kind:"deleted",catagory:"couse",text:"id: "+@course.id.to_s+" ,name:"+@course.name+" ,teacher: "+@course.teacher)
     @course.destroy
   end

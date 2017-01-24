@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   # GET /transactions
   def index
-    if @current_user.status=="admin"
+    if @current_user.status=="admin" || @current_user.status == "trusted"
       @transactions = Transaction.all
 
       render json: @transactions ,meta: {total: @transactions.sum(:value).to_f}
@@ -12,14 +12,14 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/1
   def show
-    if @current_user.status=="admin"
+    if @current_user.status=="admin" || @current_user.status == "trusted"
         render json: @transactions
     end
   end
 
   # POST /transactions
   def create
-    if @current_user.status=="admin"
+    if @current_user.status=="admin" || @current_user.status == "trusted"
       @transaction = Transaction.new(transaction_params)
       @transaction.user = @current_user
       if @transaction.save
@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1
   def update
-    if @current_user.status=="admin"
+    if @current_user.status=="admin" || @current_user.status == "trusted"
       if @transaction.update(transaction_params)
         render json: @transaction
       else
@@ -43,7 +43,7 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1
   def destroy
-    if @current_user.status=="admin"
+    if @current_user.status=="admin" || @current_user.status == "trusted"
       @transaction.destroy
     end
   end

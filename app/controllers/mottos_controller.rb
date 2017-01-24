@@ -40,7 +40,7 @@ class MottosController < ApplicationController
 
   # DELETE /mottos/1
   def destroy
-    if(@current_user == @motto.user || @current_user.status == "admin" || @current_user.status == "moderator")
+    if(@current_user == @motto.user || @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted")
       Log.create(user:@current_user,kind:"deleted",catagory:"motto",text:"id: "+@motto.id.to_s+" ,motto: "+@motto.text+" ,created by:"+@motto.user.forename+" "+@motto.user.name)
 
       @motto.destroy

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   # note that this include statement comes AFTER the devise block above
   include DeviseTokenAuth::Concerns::User
 
-   enum status: [ :normal, :moderator, :admin ]
+   enum status: [ :normal, :moderator, :admin , :trusted]
 
 
    def voted_for?(poll)

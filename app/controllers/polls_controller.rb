@@ -31,7 +31,7 @@ class PollsController < ApplicationController
 
   # PATCH/PUT /polls/1
   def update
-   if @current_user.status == "admin" || @current_user.status == "moderator"
+   if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted"
 
     if @poll.update(poll_params)
       render json: @poll, include: ['options']
@@ -43,7 +43,7 @@ class PollsController < ApplicationController
 
   # DELETE /polls/1
   def destroy
-    if @current_user.status == "admin" || @current_user.status == "moderator"
+    if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted"
       Log.create(user:@current_user,kind:"deleted",catagory:"poll",text:"id: "+@poll.id.to_s+" ,poll: "+@poll.topic+" ,created by:"+@poll.user.forename+" "+@poll.user.name)
 
       @poll.destroy
