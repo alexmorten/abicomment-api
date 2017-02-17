@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   def index
     if @current_user.status=="admin" || @current_user.status == "trusted"
-      @transactions = Transaction.all
+      @transactions = Transaction.order(date: :asc,value: :asc)
 
       render json: @transactions ,meta: {total: @transactions.sum(:value).to_f}
     end
