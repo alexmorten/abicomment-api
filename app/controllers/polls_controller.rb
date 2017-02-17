@@ -18,7 +18,7 @@ class PollsController < ApplicationController
 
   # POST /polls
   def create
-    if @current_user.status == "admin" || @current_user.status == "moderator"
+    if @current_user.status == "admin" || @current_user.status == "moderator" || @current_user.status == "trusted" 
       @poll = Poll.new(poll_params)
       @poll.user=@current_user
       if @poll.save
