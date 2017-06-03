@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :mottos, through: :mottovotes
 
   has_many :transactions
+  has_many :promtables
+  has_one :promtableentry
 
   has_many :favorites
   has_many :favorited , :class_name => "Favorite" , :inverse_of => :favoritee
