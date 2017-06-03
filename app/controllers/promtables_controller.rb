@@ -11,7 +11,7 @@ class PromtablesController < ApplicationController
 
   # GET /promtables/1
   def show
-    render json: @promtable
+    render json: @promtable, current_user: @current_user
   end
 
   # POST /promtables
@@ -20,7 +20,7 @@ class PromtablesController < ApplicationController
     @promtable = Promtable.new(promtable_params)
     if @current_user.status == "admin"
       if @promtable.save
-        render json: @promtable, status: :created, location: @promtable
+        render json: @promtable, status: :created, location: @promtable, current_user: @current_user
       else
         render json: @promtable.errors, status: :unprocessable_entity
       end
@@ -31,7 +31,7 @@ class PromtablesController < ApplicationController
   def update
     if @current_user.status == "admin"
       if @promtable.update(promtable_params)
-        render json: @promtable
+        render json: @promtable, current_user: @current_user
       else
         render json: @promtable.errors, status: :unprocessable_entity
       end
