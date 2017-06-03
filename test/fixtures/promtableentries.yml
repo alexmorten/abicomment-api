@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  promtable: one
+  user: one
+  seats: 1
+
+two:
+  promtable: two
+  user: two
+  seats: 1

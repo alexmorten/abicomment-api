@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119134643) do
+ActiveRecord::Schema.define(version: 20170603102657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,26 @@ ActiveRecord::Schema.define(version: 20170119134643) do
 
   add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree
 
+  create_table "promtableentries", force: :cascade do |t|
+    t.integer  "promtable_id"
+    t.integer  "user_id"
+    t.integer  "seats"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "promtableentries", ["promtable_id"], name: "index_promtableentries_on_promtable_id", using: :btree
+  add_index "promtableentries", ["user_id"], name: "index_promtableentries_on_user_id", using: :btree
+
+  create_table "promtables", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "seats"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "promtables", ["user_id"], name: "index_promtables_on_user_id", using: :btree
+
   create_table "quotes", force: :cascade do |t|
     t.string   "text"
     t.string   "quoted"
@@ -203,6 +223,9 @@ ActiveRecord::Schema.define(version: 20170119134643) do
   add_foreign_key "mottovotes", "users"
   add_foreign_key "options", "polls"
   add_foreign_key "polls", "users"
+  add_foreign_key "promtableentries", "promtables"
+  add_foreign_key "promtableentries", "users"
+  add_foreign_key "promtables", "users"
   add_foreign_key "quotes", "users"
   add_foreign_key "transactions", "users"
   add_foreign_key "votes", "options"

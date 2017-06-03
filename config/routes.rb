@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :promtableentries
+  resources :promtables
   resources :transactions
   resources :favorites
   resources :mottovotes
