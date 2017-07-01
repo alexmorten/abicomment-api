@@ -1,7 +1,7 @@
 class Promtable < ApplicationRecord
   belongs_to :user
   has_many :promtableentries, dependent: :destroy
-
+  has_many :users,through: :promtableentries
   def taken
     promtableentries.sum(:seats)
   end
