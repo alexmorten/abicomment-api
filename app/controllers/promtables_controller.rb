@@ -6,7 +6,7 @@ class PromtablesController < ApplicationController
   def index
     @promtables = Promtable.all
 
-    render json: @promtables, current_user: @current_user
+    render json: @promtables, current_user: @current_user, include: 'promtableentries'
   end
 
   # GET /promtables/1
