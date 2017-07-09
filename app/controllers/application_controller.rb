@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
-  
-  after_action :cors_set_access_control_headers
 
-def cors_set_access_control_headers
-  headers['Access-Control-Allow-Origin']      = '*'
-  headers['Access-Control-Allow-Methods']     = 'POST, GET, OPTIONS'
-  headers['Access-Control-Max-Age']           = '1728000'
-  headers['Access-Control-Allow-Credentials'] = 'true'
-end
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:forename,:name])
+  end
 end
